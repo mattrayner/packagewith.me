@@ -1,0 +1,18 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      args:
+        RACK_ENV: development
+    volumes:
+      - .:/app
+      - /app/vendor/bundle/
+      - /app/tmp/
+    command: 'bundle exec rails s -b 0.0.0.0 -p 3000'
+    ports:
+      - '3000:3000'
+    environment:
+      - ETSY_API_KEY
+      - ETSY_API_SECRET
+      - RACK_ENV=development
