@@ -9,11 +9,11 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building development Docker image...
-      - docker build -t $IMAGE_REPO_NAME --build-arg --build-arg RACK_ENV=development .
+      - docker build -t $IMAGE_REPO_NAME --build-arg RACK_ENV=development .
       - echo Testing docker image
       - docker run --rm $IMAGE_REPO_NAME:$IMAGE_TAG bundle exec rake
       - echo Building production Docker image...
-      - docker build -t $IMAGE_REPO_NAME --build-arg --build-arg RACK_ENV=production .
+      - docker build -t $IMAGE_REPO_NAME --build-arg RACK_ENV=production .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
