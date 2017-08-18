@@ -152,6 +152,8 @@ GEM
     turbolinks-source (5.0.3)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2017.2)
+      tzinfo (>= 1.0.0)
     web-console (3.5.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -179,6 +181,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
+  tzinfo-data
   web-console (>= 3.3.0)
 
 BUNDLED WITH
