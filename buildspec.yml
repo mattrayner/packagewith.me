@@ -8,11 +8,13 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker build -t $IMAGE_REPO_NAME --build-arg ETSY_API_KEY=$ETSY_API_KEY --build-arg ETSY_API_SECRET=$ETSY_API_SECRET --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE --build-arg AIRBRAKE_PROJECT_ID=$AIRBRAKE_PROJECT_ID --build-arg AIRBRAKE_PROJECT_KEY=$AIRBRAKE_PROJECT_KEY --build-arg RACK_ENV=$RACK_ENV .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo Building development Docker image...
+      - docker build -t $IMAGE_REPO_NAME --build-arg --build-arg RACK_ENV=development .
       - echo Testing docker image
-      - docker run $IMAGE_REPO_NAME:$IMAGE_TAG bundle exec rake
+      - docker run --rm $IMAGE_REPO_NAME:$IMAGE_TAG bundle exec rake
+      - echo Building production Docker image...
+      - docker build -t $IMAGE_REPO_NAME --build-arg --build-arg RACK_ENV=production .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
