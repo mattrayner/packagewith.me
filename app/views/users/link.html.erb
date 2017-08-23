@@ -1,0 +1,7 @@
+<% if(@current_user.oauth_token) %>
+  <h1>Re-link your account to Etsy</h1>
+<% else %>
+  <h1>Link your account to Etsy</h1>
+<% end %>
+
+<%= link_to 'Login with Etsy', :auth_login %>

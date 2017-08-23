@@ -6,8 +6,10 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+`2.4.1`
 
 * System dependencies
+`Dynamo DB (http://docs.aws.amazon.com/amazondynamodb/latest/gettingstartedguide/GettingStarted.Download.html)`
 
 * Configuration
 

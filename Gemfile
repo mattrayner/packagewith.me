@@ -37,6 +37,19 @@ gem 'jbuilder', '~> 2.5'
 # Include time zone information
 gem 'tzinfo-data'
 
+# Include AWS for accessing DynamoDB
+gem 'ocean-dynamo'
+
+# Include Etsy gem
+gem 'etsy'
+
+# BCrypt for encryption
+gem 'bcrypt'
+
+# Use foundation for the frontend
+gem 'foundation-rails'
+gem 'jquery-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
