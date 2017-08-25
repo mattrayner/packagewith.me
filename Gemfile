@@ -46,8 +46,8 @@ gem 'etsy'
 # BCrypt for encryption
 gem 'bcrypt'
 
-# Use foundation for the frontend
-gem 'foundation-rails'
+# Use bootstrap for the frontend
+gem 'bootstrap', '~> 4.0.0.beta'
 gem 'jquery-rails'
 
 group :development, :test do

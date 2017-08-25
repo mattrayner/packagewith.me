@@ -7,11 +7,61 @@
     <title><%= content_for?(:title) ? yield(:title) : "Package With Me" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
+
+    <nav class="navbar navbar-expand-md navbar-branded navbar-light bg-light justify-content-between fixed-top">
+      <%= link_to 'Package With Me', :root, class: 'navbar-brand' %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item<%= (params[:controller] == 'brochure' && params[:action] == 'index') ? ' active' : '' %>">
+            <%= link_to "Home#{(params[:controller] == 'brochure' && params[:action] == 'index') ? ' <span class="sr-only">(current)</span>' : ''}".html_safe, :root, class: 'nav-link' %>
+          </li>
+          <li class="nav-item<%= (params[:controller] == 'brochure' && params[:action] == 'fatures') ? ' active' : '' %>">
+            <%= link_to "Features#{(params[:controller] == 'brochure' && params[:action] == 'index') ? ' <span class="sr-only">(current)</span>' : ''}".html_safe, :root, class: 'nav-link' %>
+          </li>
+          <li class="nav-item<%= (params[:controller] == 'brochure' && params[:action] == 'about') ? ' active' : '' %>">
+            <%= link_to "About#{(params[:controller] == 'brochure' && params[:action] == 'index') ? ' <span class="sr-only">(current)</span>' : ''}".html_safe, :root, class: 'nav-link' %>
+          </li>
+        </ul>
+        <ul class="navbar-nav justify-content-end">
+          <% if(@current_user) %>
+            <li class="nav-item">
+              <%= link_to 'Profile', user_path(@current_user.id), class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Dashboard', user_path(@current_user.id), class: 'btn btn-outline-success' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Sign out', :log_out, method: 'delete', class: 'btn btn-outline-secondary' %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'Register', :sign_up, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Sign in', :log_in, class: 'btn btn-outline-success' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div class="alert alert-info" role="alert">
+        <span class="sr-only">(Notice) </span><%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-alert" role="alert">
+        <span class="sr-only">(Alert) </span><%= alert %>
+      </div>
+  <% end %>
 
     <%= yield %>
 

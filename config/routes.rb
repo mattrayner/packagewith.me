@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   end
 
   # User session management
-  get     '/sign_in',  to: 'sessions#new',  as: 'log_in'
-  delete  '/sign_out',  to: 'sessions#new', as: 'log_out'
-  resources :sessions, only: :create
+  get       '/sign_in',   to: 'sessions#new',     as: 'log_in'
+  get       '/sign_out',  to: 'sessions#delete',  as: 'log_out'
+  resources :sessions,    only: :create
 
   # User signup
   scope   '/sign_up' do

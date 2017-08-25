@@ -41,6 +41,7 @@ build: # Using the variables defined above, run `docker build`, tagging the imag
 		--build-arg SECRET_KEY_BASE=$(SECRET_KEY_BASE) \
 		--build-arg AIRBRAKE_PROJECT_ID=$(AIRBRAKE_PROJECT_ID) \
 		--build-arg AIRBRAKE_PROJECT_KEY=$(AIRBRAKE_PROJECT_KEY) \
+		--build-arg FORCE_SSL=$(FORCE_SSL) \
 		--build-arg RACK_ENV=$(RACK_ENV) \
 		.
 

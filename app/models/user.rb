@@ -1,4 +1,5 @@
 class User < OceanDynamo::Table
+  include ActiveModel::Validations
 
   dynamo_schema(:id, create: !Rails.env.production?) do
     attribute :email,         :string

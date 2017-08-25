@@ -15,5 +15,6 @@ class SessionsController < ApplicationController
 
   def delete
     session[:user_id] = nil
+    redirect_to :log_in, notice: 'Successfully logged out'
   end
 end
