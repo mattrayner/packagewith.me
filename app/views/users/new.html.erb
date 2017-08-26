@@ -1,4 +1,21 @@
-<h1>Sign Up</h1>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Register</h1>
+    <p class="lead">You're just two steps away from creating labels!</p>
+    <hr/>
+    <div class="row">
+      <div class="col-sm-6">
+        <h2>1. Create an account</h2>
+        <p>First, create an account on Package With Me.</p>
+      </div>
+      <div class="col-sm-6">
+        <h2>2.Link your account to Etsy</h2>
+        <p>Give Package With Me permission to read your recieved tranactions (so we can generate labels)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <%= form_for @user do |f| %>
     <% if @user.errors.any? %>
