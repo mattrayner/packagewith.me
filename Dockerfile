@@ -13,17 +13,14 @@ ARG RACK_ENV=production
 ADD Gemfile /app/
 ADD Gemfile.lock /app/
 
-
 # Set the working DIR.
 WORKDIR /app
 
 # Install system and application dependencies.
-RUN echo "Environment (RACK_ENV): $RACK_ENV" && \
-    apk --update add --virtual build-dependencies build-base ruby-dev nodejs && \
+RUN apk --update add --virtual build-dependencies build-base ruby-dev nodejs && \
     gem install bundler --no-ri --no-rdoc && \
     if [ "$RACK_ENV" == "production" ]; then \
       bundle install --without development test --path vendor/bundle; \
-      apk del build-dependencies; \
     else \
       bundle install --path vendor/bundle; \
     fi
@@ -32,11 +29,7 @@ RUN echo "Environment (RACK_ENV): $RACK_ENV" && \
 ADD . /app
 
 # Make sure our user owns the application directory.
-RUN if [ "$RACK_ENV" == "production" ]; then \
-      chown -R nobody:nogroup /app; \
-    else \
-      chown -R nobody:nogroup /app /usr/local/bundle; \
-    fi
+RUN chown -R nobody:nogroup /app /usr/local/bundle
 
 # Set up our user and environment
 USER nobody
@@ -47,6 +40,7 @@ ENV AIRBRAKE_PROJECT_ID $AIRBRAKE_PROJECT_ID
 ENV AIRBRAKE_PROJECT_KEY $AIRBRAKE_PROJECT_KEY
 ENV FORCE_SSL $FORCE_SSL
 ENV RACK_ENV $RACK_ENV
+ENV RAILS_ENV $RACK_ENV
 
 # Precompile assets
 RUN bundle exec rails assets:precompile
