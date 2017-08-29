@@ -65,6 +65,19 @@
 
     <%= yield %>
 
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <%= link_to 'Package With Me', :root, class: 'footer-brand' %>
+          </div>
+          <div class="col-md-6 text-right">
+            <p class="text-muted text-small">&copy; <%= Time.now.year %> <%= link_to 'Package With Me', :root %>. All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <%= javascript_include_tag "application" %>
   </body>
 </html>

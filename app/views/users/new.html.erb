@@ -14,31 +14,55 @@
       </div>
     </div>
   </div>
-</div>
 
-
-<%= form_for @user do |f| %>
+  <%= form_for @user do |f| %>
     <% if @user.errors.any? %>
-        <div class="error_messages">
-          <h2>Form is invalid</h2>
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">There were some errors:</h4>
           <ul>
             <% for message in @user.errors.full_messages %>
                 <li><%= message %></li>
             <% end %>
           </ul>
+          <hr/>
+          <p class="mb-0">
+            Please adress each of these issues and try again.
+          </p>
         </div>
     <% end %>
-    <p>
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
-    </p>
-    <p>
-      <%= f.label :password %><br />
-      <%= f.password_field :password %>
-    </p>
-    <p>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </p>
-    <p class="button"><%= f.submit %></p>
-<% end %>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= f.label :email, class: 'col-form-label' %>
+        <%= f.text_field :email, class: "form-control#{@user.errors[:email].present? ? ' is-invalid' : ''}", placeholder: 'matt@packagewith.me', required: true %>
+        <% if @user.errors[:email].present? %>
+          <div class="invalid-feedback" style="display: block;">
+            <%= @user.errors[:email].join(', ') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <%= f.label :password, class: 'col-form-label' %>
+        <%= f.password_field :password, class: "form-control#{@user.errors[:password].present? ? ' is-invalid' : ''}", placeholder: 'Secret', required: true %>
+        <% if @user.errors[:password].present? %>
+          <div class="invalid-feedback" style="display: block;">
+            <%= @user.errors[:password].join(', ') %>
+          </div>
+        <% end %>
+      </div>
+      <div class="form-group col-md-6">
+        <%= f.label :password_confirmation, class: 'col-form-label' %>
+        <%= f.password_field :password_confirmation, class: "form-control#{@user.errors[:password_confirmation].present? ? ' is-invalid' : ''}", placeholder: 'Secret again', required: true %>
+        <% if @user.errors[:password_confirmation].present? %>
+          <div class="invalid-feedback" style="display: block;">
+            <%= @user.errors[:password_confirmation].join(', ') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= f.submit 'Register', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<pre><%= debug @user %></pre>

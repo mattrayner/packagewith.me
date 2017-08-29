@@ -1,6 +1,8 @@
 class User < OceanDynamo::Table
   include ActiveModel::Validations
 
+  validates :email, presence: true, email: true
+
   dynamo_schema(:id, create: !Rails.env.production?) do
     attribute :email,         :string
     attribute :oauth_token,   :string,   default: nil
@@ -19,10 +21,6 @@ class User < OceanDynamo::Table
     else
       nil
     end
-  end
-
-  def password
-    self.password_hash
   end
 
   def password=(unencrypted_password)

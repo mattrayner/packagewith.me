@@ -18,20 +18,15 @@ class UsersController < ApplicationController
     @user.email = user_params[:email]
     @user.password = user_params[:password]
 
-    if user
-      flash[:alert] = 'An account already exists for that email address.'
-      return render :new, alert: 'There was a problem creating your account.'
-    end
+    unique_email = EmailValidator.not_unique(@user, user)
+    valid_email = EmailValidator.validate_email(@user, user_params[:email])
+    valid_password = PasswordValidator.validate_passwords(@user, user_params[:password], user_params[:password_confirmation])
 
-    if user_params[:password] == user_params[:password_confirmation]
-      if @user.save
-        session[:user_id] = @user.id
-        redirect_to :link_account
-      else
-        flash[:alert] = 'There was a problem creating your account.'
-      end
+    if valid_password && valid_email && @user.save
+      session[:user_id] = @user.id
+      redirect_to :link_account
     else
-      redirect_to :new, alert: 'Password mismatch. Please ensure both of the passwords match'
+      render :new
     end
   end
 
