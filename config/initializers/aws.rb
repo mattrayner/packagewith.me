@@ -14,7 +14,8 @@ unless File.exists?(f)
   abort
 end
 
-cfg = YAML.load(File.read(f))[Rails.env]
+template = ERB.new File.read(f)
+cfg = YAML.load(template.result(binding))[Rails.env]
 
 options = {
   region: cfg['region'],

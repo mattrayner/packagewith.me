@@ -45,3 +45,6 @@ bower.json
 
 .idea/
 public/assets
+
+node_modules
+yarn.lock
