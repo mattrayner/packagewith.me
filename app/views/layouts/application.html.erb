@@ -35,7 +35,7 @@
               <%= link_to 'Profile', user_path(@current_user.id), class: 'nav-link' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'Dashboard', user_path(@current_user.id), class: 'btn btn-outline-success' %>
+              <%= link_to 'Dashboard', dashboard_path, class: 'btn btn-outline-success' %>
             </li>
             <li class="nav-item">
               <%= link_to 'Sign out', :log_out, method: 'delete', class: 'btn btn-outline-secondary' %>
@@ -52,16 +52,20 @@
       </div>
     </nav>
 
-    <% if notice %>
-      <div class="alert alert-info" role="alert">
-        <span class="sr-only">(Notice) </span><%= notice %>
+    <% if notice || alert %>
+      <div class="container">
+        <% if notice %>
+          <div class="alert alert-info" role="alert">
+            <span class="sr-only">(Notice) </span><%= notice %>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger" role="alert">
+            <span class="sr-only">(Alert) </span><%= alert %>
+          </div>
+        <% end %>
       </div>
     <% end %>
-    <% if alert %>
-      <div class="alert alert-alert" role="alert">
-        <span class="sr-only">(Alert) </span><%= alert %>
-      </div>
-  <% end %>
 
     <%= yield %>
 

@@ -4,7 +4,16 @@ class AuthController < ApplicationController
   def login
     Etsy.callback_url = url_for(:auth_authorise)
 
-    request_token = Etsy.request_token
+    begin
+      request_token = Etsy.request_token
+    rescue Errno::ECONNRESET => e
+      logger.error(e)
+      return redirect_to :link_account, alert: 'There was an issue connecting to Etsy. Please try again later.'
+    rescue SocketError => e
+      logger.error(e)
+      return redirect_to :link_account, alert: 'There was an issue connecting to Etsy. Please try again later.'
+    end
+
     session[:request_token]  = request_token.token
     session[:request_secret] = request_token.secret
 

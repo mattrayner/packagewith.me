@@ -17,9 +17,9 @@ class EmailValidator < ActiveModel::EachValidator
     email_regex_match
   end
 
-  def self.not_unique(object, user)
+  def self.unique_email(object, user)
     object.errors[:email] << EmailValidator::ALREADY_EXISTS_MESSAGE if user
 
-    user
+    !user
   end
 end

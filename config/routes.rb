@@ -20,5 +20,7 @@ Rails.application.routes.draw do
     get '/link_account',  to: 'users#link', as: 'link_account'
   end
 
+  get '/dashboard', to: 'dashboard#index', as: 'dashboard'
+
   resources :users
 end

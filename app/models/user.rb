@@ -28,8 +28,4 @@ class User < OceanDynamo::Table
     self.password_hash = BCrypt::Engine.hash_secret(unencrypted_password, password_salt)
   end
 
-  def enabled?
-
-  end
-
 end

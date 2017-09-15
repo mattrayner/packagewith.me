@@ -1,0 +1,12 @@
+<% @receipts.each do |reciept| %>
+  <p>
+    <%= reciept.name %>
+    <%= reciept.first_line %>
+    <%= reciept.second_line if reciept.second_line %>
+    <%= reciept.city %>
+    <%= reciept.state %>
+    <%= reciept.zip %>
+    <%= Etsy::Country.find(reciept.country_id).name %>
+  </p>
+  <%= debug(reciept) %>
+<% end %>
