@@ -1,12 +1,25 @@
-<% @receipts.each do |reciept| %>
-  <p>
-    <%= reciept.name %>
-    <%= reciept.first_line %>
-    <%= reciept.second_line if reciept.second_line %>
-    <%= reciept.city %>
-    <%= reciept.state %>
-    <%= reciept.zip %>
-    <%= Etsy::Country.find(reciept.country_id).name %>
-  </p>
-  <%= debug(reciept) %>
-<% end %>
+<%= debug(@receipts.first.result) unless @receipts.empty? %>
+<div class="container">
+  <% @receipts.each do |reciept| %>
+      <h4><%= reciept.name.split.map(&:capitalize).join(' ') %></h4>
+      <p><strong><%= "#{reciept.result['was_paid'] ? 'PAID' : 'NOT PAID'} - Order totalling: #{reciept.result['grandtotal']}#{reciept.result['currency_code']}" %></strong></p>
+      <address>
+        <%
+          address_parts = %w(first_line second_line city state zip)
+          address_parts.each do |address_part|
+            if reciept.send(address_part.to_sym).present?
+        %>
+                <%= reciept.send(address_part.to_sym) %><br />
+            <%
+              end
+              end
+            %>
+        <%= ETSY_COUNTRIES[reciept.country_id] %>
+      </address>
+      <p><strong>Message from buyer:</strong></p>
+      <p class="text-light">
+        <%= reciept.result['message_fron_buyer'] %>
+      </p>
+      <hr/>
+  <% end %>
+</div>
